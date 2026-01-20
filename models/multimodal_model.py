@@ -91,15 +91,15 @@ class MultimodalClassifier(nn.Module):
         else:
             raise ValueError(f"Unknown fusion type: {fusion_type}")
         
-        # Classification head (memory optimized)
+        # Classification head - keep original simple structure
         self.classifier = nn.Sequential(
-            nn.Linear(fusion_dim, 128),  # Reduced from 256
+            nn.Linear(fusion_dim, 256),
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(128, num_classes)  # Direct to output
+            nn.Linear(256, num_classes)
         )
         
-        print(f"\nClassifier head: {fusion_dim} -> 128 -> {num_classes}")
+        print(f"\nClassifier head: {fusion_dim} -> 256 -> {num_classes}")
         print(f"{'='*60}\n")
     
     def forward(self, texts, images, return_features=False):
