@@ -99,8 +99,6 @@ class ImagePreprocessor:
                     saturation=0.2,
                     hue=0.1
                 ),
-                transforms.RandomRotation(15),
-                transforms.RandomGrayscale(p=0.1),
                 transforms.ToTensor(),
                 transforms.Normalize(
                     mean=[0.485, 0.456, 0.406],  # ImageNet stats
