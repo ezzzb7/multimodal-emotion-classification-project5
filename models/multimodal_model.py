@@ -8,7 +8,8 @@ import torch.nn as nn
 
 from .text_encoder import TextEncoder
 from .image_encoder import ImageEncoder
-from .fusion import LateFusion, EarlyFusion, CrossAttentionFusion
+from .fusion import (LateFusion, EarlyFusion, CrossAttentionFusion, 
+                     GatedFusion, MultiHeadCrossAttentionFusion, TransformerFusion)
 
 
 class MultimodalClassifier(nn.Module):
@@ -23,16 +24,26 @@ class MultimodalClassifier(nn.Module):
                  fusion_type='late',
                  feature_dim=512,
                  freeze_encoders=True,
-                 dropout=0.3):
+                 dropout=0.3,
+                 transformer_heads=8,
+                 transformer_layers=2,
+                 transformer_dropout=0.1,
+                 transformer_ffn_dim=None,
+                 unfreeze_layers=0):
         """
         Args:
             num_classes: Number of sentiment classes (3: pos/neu/neg)
             text_model: Text encoder model name
             image_model: Image encoder model name
-            fusion_type: 'late', 'early', or 'cross_attention'
+            fusion_type: 'late', 'early', 'cross_attention', or 'transformer'
             feature_dim: Feature dimension for encoders
             freeze_encoders: Whether to freeze pretrained encoders
             dropout: Dropout rate for classifier
+            transformer_heads: Number of attention heads for transformer fusion
+            transformer_layers: Number of transformer layers
+            transformer_dropout: Dropout rate for transformer
+            transformer_ffn_dim: FFN dimension for transformer (default: feature_dim * 4)
+            unfreeze_layers: Number of layers to unfreeze (0=all frozen)
         """
         super(MultimodalClassifier, self).__init__()
         
@@ -88,6 +99,38 @@ class MultimodalClassifier(nn.Module):
                 hidden_dim=feature_dim // 2
             )
             fusion_dim = feature_dim // 2
+        elif fusion_type == 'gated':
+            # V2新增: 门控融合
+            self.fusion = GatedFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                output_dim=feature_dim
+            )
+            fusion_dim = feature_dim
+        elif fusion_type == 'multihead_cross_attention':
+            # V2新增: 多头交叉注意力融合
+            self.fusion = MultiHeadCrossAttentionFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                hidden_dim=feature_dim // 2,
+                num_heads=4
+            )
+            fusion_dim = feature_dim // 2
+        elif fusion_type == 'transformer':
+            # V3新增: Transformer融合（支持配置参数）
+            if transformer_ffn_dim is None:
+                transformer_ffn_dim = feature_dim * 4  # 默认值
+            
+            self.fusion = TransformerFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                hidden_dim=feature_dim,
+                num_heads=transformer_heads,
+                num_layers=transformer_layers,
+                dropout=transformer_dropout,
+                ffn_dim=transformer_ffn_dim  # ✅ 传递FFN维度配置
+            )
+            fusion_dim = feature_dim
         else:
             raise ValueError(f"Unknown fusion type: {fusion_type}")
         

@@ -5,7 +5,12 @@ Memory-efficient alternative to full BERT
 
 import torch
 import torch.nn as nn
-from transformers import DistilBertModel, DistilBertTokenizer
+from transformers import (
+    DistilBertModel, DistilBertTokenizer,
+    RobertaModel, RobertaTokenizer,
+    BertModel, BertTokenizer,
+    AutoModel, AutoTokenizer
+)
 
 
 class TextEncoder(nn.Module):
@@ -32,13 +37,43 @@ class TextEncoder(nn.Module):
         self.max_length = max_length
         self.output_dim = output_dim
         
-        # Load pretrained DistilBERT
+        # Load pretrained model (支持多种架构)
         print(f"Loading {model_name}...")
-        self.bert = DistilBertModel.from_pretrained(
-            model_name,
-            torch_dtype=torch.float32  # Keep fp32 for now, will use mixed precision in training
-        )
-        self.tokenizer = DistilBertTokenizer.from_pretrained(model_name)
+        
+        # 根据模型名称选择合适的类
+        if 'roberta' in model_name.lower():
+            self.bert = RobertaModel.from_pretrained(
+                model_name,
+                torch_dtype=torch.float32,
+                local_files_only=True  # 使用本地缓存
+            )
+            self.tokenizer = RobertaTokenizer.from_pretrained(model_name, local_files_only=True)
+            print(f"  ✓ Using RoBERTa architecture")
+        elif 'distilbert' in model_name.lower():
+            self.bert = DistilBertModel.from_pretrained(
+                model_name,
+                torch_dtype=torch.float32,
+                local_files_only=True  # 使用本地缓存
+            )
+            self.tokenizer = DistilBertTokenizer.from_pretrained(model_name, local_files_only=True)
+            print(f"  ✓ Using DistilBERT architecture")
+        elif 'bert' in model_name.lower():
+            self.bert = BertModel.from_pretrained(
+                model_name,
+                torch_dtype=torch.float32,
+                local_files_only=True  # 使用本地缓存
+            )
+            self.tokenizer = BertTokenizer.from_pretrained(model_name, local_files_only=True)
+            print(f"  ✓ Using BERT architecture")
+        else:
+            # 使用AutoModel作为后备
+            self.bert = AutoModel.from_pretrained(
+                model_name,
+                torch_dtype=torch.float32,
+                local_files_only=True  # 使用本地缓存
+            )
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
+            print(f"  ✓ Using Auto architecture")
         
         # Freeze BERT parameters to save memory
         if freeze_bert:

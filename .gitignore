@@ -49,9 +49,14 @@ Thumbs.db
 # Experiments
 results/
 wandb/
+analysis_results/
+splits/
 
-# Data (large files)
-# Uncomment if needed
-# data/
-# *.jpg
-# *.png
+# Data (large files, not included in repo)
+data/
+*.jpg
+*.png
+
+# Temp files
+*.tmp
+*_temp.*

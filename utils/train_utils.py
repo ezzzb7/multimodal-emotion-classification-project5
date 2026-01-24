@@ -28,7 +28,7 @@ def count_parameters(model):
     return total, trainable
 
 
-def save_checkpoint(model, optimizer, epoch, best_acc, save_path, experiment_name=None):
+def save_checkpoint(model, optimizer, epoch, best_acc, save_path, experiment_name=None, best_f1=None):
     """Save model checkpoint"""
     checkpoint = {
         'epoch': epoch,
@@ -37,6 +37,8 @@ def save_checkpoint(model, optimizer, epoch, best_acc, save_path, experiment_nam
         'best_acc': best_acc,
         'experiment_name': experiment_name  # For resume training
     }
+    if best_f1 is not None:
+        checkpoint['best_f1'] = best_f1
     torch.save(checkpoint, save_path)
     print(f"✓ Checkpoint saved: {save_path}")
 

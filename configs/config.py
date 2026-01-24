@@ -16,7 +16,7 @@ class Config:
     MODALITY = 'multimodal'  # 'multimodal', 'text', 'image'
     TEXT_MODEL = 'distilbert-base-uncased'
     IMAGE_MODEL = 'resnet50'
-    FUSION_TYPE = 'early'  # 'late', 'early', 'cross_attention'
+    FUSION_TYPE = 'cross_attention'  # 'late', 'early', 'cross_attention'
     FEATURE_DIM = 512  # Standard dimension
     DROPOUT = 0.3
     FREEZE_ENCODERS = True
@@ -43,7 +43,7 @@ class Config:
     SAVE_DIR = 'checkpoints'
     LOG_DIR = 'logs'
     EXPERIMENT_NAME = None  # Auto-generate: {fusion_type}_{modality}_YYYYMMDD_HHMMSS
-    RESUME_FROM = r'checkpoints\early_multimodal_20260120_195503_epoch9.pth'  # 从Epoch 9继续
+    RESUME_FROM = None  # 从头开始训练 Cross-Attention
     SAVE_EVERY = 1  # Save every N epochs
     EARLY_STOPPING_PATIENCE = 5
     

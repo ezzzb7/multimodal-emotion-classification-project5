@@ -88,7 +88,8 @@ def get_data_loaders(data_dir,
                      num_workers=0,
                      seed=42,
                      img_size=224,
-                     force_resplit=False):
+                     force_resplit=False,
+                     enhanced_augmentation=False):
     """
     获取训练/验证/测试的DataLoader
     
@@ -102,6 +103,7 @@ def get_data_loaders(data_dir,
         seed: 随机种子
         img_size: 图像尺寸
         force_resplit: 是否强制重新划分数据集
+        enhanced_augmentation: 是否使用增强数据预处理
     
     Returns:
         train_loader, val_loader, test_loader
@@ -122,17 +124,30 @@ def get_data_loaders(data_dir,
     train_text_prep = TextPreprocessor(
         remove_emoji=False, 
         lowercase=True, 
-        remove_hashtags=False
+        remove_hashtags=False,
+        expand_contractions=enhanced_augmentation,  # V2增强
+        convert_emoji=enhanced_augmentation,  # V2增强
+        mode='train'
     )
-    train_img_prep = ImagePreprocessor(mode='train', img_size=img_size)
+    train_img_prep = ImagePreprocessor(
+        mode='train', 
+        img_size=img_size, 
+        enhanced=enhanced_augmentation  # V2增强
+    )
     
     # 验证/测试集：不使用数据增强
     val_text_prep = TextPreprocessor(
         remove_emoji=False, 
         lowercase=True, 
-        remove_hashtags=False
+        remove_hashtags=False,
+        expand_contractions=True,  # 验证集也扩展缩写
+        convert_emoji=True,  # 验证集也转换emoji
+        mode='val'
     )
     val_img_prep = ImagePreprocessor(mode='val', img_size=img_size)
+    
+    if enhanced_augmentation:
+        print("⭐ 使用增强数据预处理 (V2)")
     
     # === 创建数据集 ===
     print(f"\n{'='*60}")
