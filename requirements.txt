@@ -1,10 +1,46 @@
-torch>=1.12.0
-torchvision>=0.13.0
-transformers>=4.20.0
-pillow>=9.0.0
-numpy>=1.21.0
-pandas>=1.3.0
-scikit-learn>=1.0.0
-tqdm>=4.62.0
-matplotlib>=3.5.0
-seaborn>=0.11.0
+# ===========================================
+# 多模态情感分类项目 - 依赖列表
+# Multimodal Sentiment Classification
+# ===========================================
+
+# PyTorch (核心深度学习框架)
+# 推荐使用 CUDA 版本以获得 GPU 加速
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Transformers (DistilBERT 模型)
+transformers>=4.30.0
+
+# 图像处理
+pillow>=9.5.0
+
+# 数值计算
+numpy>=1.24.0
+
+# 数据处理
+pandas>=2.0.0
+
+# 机器学习工具
+scikit-learn>=1.3.0
+
+# 进度条
+tqdm>=4.65.0
+
+# 可视化
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# ===========================================
+# 安装说明：
+# 
+# CPU 版本:
+#   pip install -r requirements.txt
+#
+# GPU 版本 (CUDA 11.8):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+#   pip install -r requirements.txt
+#
+# GPU 版本 (CUDA 12.1):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   pip install -r requirements.txt
+# ===========================================
