@@ -1,0 +1,15 @@
+{
+  "completed": [
+    "BC0"
+  ],
+  "results": [
+    {
+      "exp_id": "BC0",
+      "exp_name": "HP1\u57fa\u7ebf\u590d\u73b0",
+      "val_acc": 0.70625,
+      "val_f1": 0.5688736700457255,
+      "best_epoch": 2,
+      "training_time": 40.04245932102204
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+exp_id,exp_name,modality,fusion_type,val_acc,val_f1,val_loss,train_acc,train_f1,best_epoch,total_epochs,trainable_params,total_params,training_time_min,timestamp
+A1,multimodal_late,multimodal,late,0.6700,0.5652,0.9281,0.6394,0.5685,8,13,1705987,91576899,48.86,2026-01-24 21:18:40
+A2,text_only,text,none,0.6475,0.5333,0.9612,0.6397,0.5512,13,18,459779,66822659,27.59,2026-01-24 21:46:52
+A3,image_only,image,none,0.6262,0.3441,1.0724,0.5359,0.3461,2,7,1115139,24623171,18.49,2026-01-24 22:05:48
+F1,fusion_late,multimodal,late,0.6700,0.5652,0.9281,0.6394,0.5685,8,13,1705987,91576899,49.72,2026-01-24 23:59:56
+F2,fusion_early,multimodal,early,0.6412,0.3727,1.0626,0.5988,0.2577,3,8,2625027,92495939,29.08,2026-01-25 00:29:24
+F3,fusion_cross_attn,multimodal,cross_attention,0.6675,0.5664,0.9149,0.6634,0.5835,7,12,2428675,92299587,44.53,2026-01-25 01:14:20
+F4,fusion_gated,multimodal,gated,0.6100,0.2808,1.0665,0.5981,0.3092,3,8,2625797,92496709,30.04,2026-01-25 01:44:55
+AF1,aligned_fusion,multimodal,aligned,0.6675,0.5665,0.9056,0.6469,0.5873,6,11,4092421,93963333,41.27,2026-01-25 12:14:31
+AF2,hierarchical_fusion,multimodal,hierarchical,0.6475,0.5157,0.9958,0.5913,0.5289,9,14,1906179,91777091,52.05,2026-01-25 13:06:58
+OPT_late,optimized_late,multimodal_optimized,late,0.7113,0.5796,0.7184,0.7428,0.6610,6,13,30849027,91579459,62.30,2026-01-25 14:13:59
+OPT_cross_attention,optimized_cross_attention,multimodal_optimized,cross_attention,0.7125,0.5841,1.0039,0.8834,0.8415,13,20,31900675,92631107,95.76,2026-01-25 15:52:50

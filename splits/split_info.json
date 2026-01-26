@@ -1,16 +1,16 @@
 {
-  "train_size": 3400,
-  "val_size": 600,
-  "val_ratio": 0.15,
+  "train_size": 3200,
+  "val_size": 800,
+  "val_ratio": 0.2,
   "seed": 42,
   "train_label_distribution": {
-    "positive": 2030,
-    "negative": 1014,
-    "neutral": 356
+    "positive": 1910,
+    "negative": 955,
+    "neutral": 335
   },
   "val_label_distribution": {
-    "positive": 358,
-    "negative": 179,
-    "neutral": 63
+    "positive": 478,
+    "negative": 238,
+    "neutral": 84
   }
 }

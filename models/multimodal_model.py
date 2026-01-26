@@ -10,6 +10,7 @@ from .text_encoder import TextEncoder
 from .image_encoder import ImageEncoder
 from .fusion import (LateFusion, EarlyFusion, CrossAttentionFusion, 
                      GatedFusion, MultiHeadCrossAttentionFusion, TransformerFusion)
+from .advanced_fusion import AlignedFusion, ContrastiveAlignedFusion, HierarchicalFusion
 
 
 class MultimodalClassifier(nn.Module):
@@ -131,6 +132,39 @@ class MultimodalClassifier(nn.Module):
                 ffn_dim=transformer_ffn_dim  # ✅ 传递FFN维度配置
             )
             fusion_dim = feature_dim
+        elif fusion_type == 'aligned':
+            # 高级融合：模态对齐 + 跨模态Transformer
+            self.fusion = AlignedFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                common_dim=feature_dim,
+                num_transformer_layers=transformer_layers,
+                nhead=transformer_heads,
+                dropout=transformer_dropout,
+                hidden_dim=384  # 平衡版：384维（~280万参数）
+            )
+            fusion_dim = feature_dim
+        elif fusion_type == 'contrastive_aligned':
+            # 高级融合：对比学习对齐 + 跨模态Transformer
+            self.fusion = ContrastiveAlignedFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                common_dim=feature_dim,
+                num_transformer_layers=transformer_layers,
+                nhead=transformer_heads,
+                dropout=transformer_dropout
+            )
+            fusion_dim = feature_dim
+            self._use_contrastive_loss = True
+        elif fusion_type == 'hierarchical':
+            # 高级融合：层次化多级融合
+            self.fusion = HierarchicalFusion(
+                text_dim=feature_dim,
+                image_dim=feature_dim,
+                hidden_dim=feature_dim // 2,
+                dropout=dropout
+            )
+            fusion_dim = 128  # 轻量版固定输出128
         else:
             raise ValueError(f"Unknown fusion type: {fusion_type}")
         

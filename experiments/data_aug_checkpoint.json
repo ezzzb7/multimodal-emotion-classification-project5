@@ -1,0 +1,42 @@
+{
+  "completed": [
+    "DA3",
+    "DA1",
+    "DA2",
+    "DA4"
+  ],
+  "results": [
+    {
+      "exp_id": "DA1",
+      "exp_name": "\u57fa\u7ebf(\u65e0\u9884\u5904\u7406)",
+      "val_acc": 0.71375,
+      "val_f1": 0.6022246973595893,
+      "best_epoch": 12,
+      "training_time": 76.25280394951503
+    },
+    {
+      "exp_id": "DA2",
+      "exp_name": "\u4ec5\u6587\u672c\u6e05\u6d17",
+      "val_acc": 0.7,
+      "val_f1": 0.5940975940975941,
+      "best_epoch": 8,
+      "training_time": 64.78780757983526
+    },
+    {
+      "exp_id": "DA3",
+      "exp_name": "\u4ec5\u56fe\u50cf\u589e\u5f3a",
+      "val_acc": 0.71125,
+      "val_f1": 0.6053722287871038,
+      "best_epoch": 11,
+      "training_time": 77.60135430494944
+    },
+    {
+      "exp_id": "DA4",
+      "exp_name": "\u6587\u672c\u6e05\u6d17+\u56fe\u50cf\u589e\u5f3a",
+      "val_acc": 0.70625,
+      "val_f1": 0.5737871850427417,
+      "best_epoch": 3,
+      "training_time": 46.066059235731764
+    }
+  ]
+}

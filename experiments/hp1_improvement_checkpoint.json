@@ -1,0 +1,24 @@
+{
+  "completed": [
+    "HP1_W2",
+    "HP1_BEST",
+    "HP1_FOCAL_W",
+    "HP1_LS"
+  ],
+  "results": [
+    {
+      "exp_id": "HP1_BEST",
+      "exp_name": "HP1\u6700\u4f73\u914d\u7f6e(\u57fa\u7ebf)",
+      "val_acc": 0.7225,
+      "val_f1": 0.5940337142095813,
+      "best_epoch": 5
+    },
+    {
+      "exp_id": "HP1_W2",
+      "exp_name": "\u589e\u52a0neg\u6743\u91cd(1,2,3)",
+      "val_acc": 0.71625,
+      "val_f1": 0.598187799710048,
+      "best_epoch": 5
+    }
+  ]
+}

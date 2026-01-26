@@ -1,0 +1,56 @@
+{
+  "completed": [
+    "HP3",
+    "HP1",
+    "HP5",
+    "HP4",
+    "HP2"
+  ],
+  "results": [
+    {
+      "exp_id": "HP1",
+      "dropout": 0.2,
+      "lr_classifier": 0.0001,
+      "weight_decay": 0.01,
+      "val_acc": 0.7225,
+      "val_f1": 0.5773411197472879,
+      "best_epoch": 5
+    },
+    {
+      "exp_id": "HP2",
+      "dropout": 0.3,
+      "lr_classifier": 0.0001,
+      "weight_decay": 0.02,
+      "val_acc": 0.715,
+      "val_f1": 0.5861004953998585,
+      "best_epoch": 5
+    },
+    {
+      "exp_id": "HP3",
+      "dropout": 0.3,
+      "lr_classifier": 5e-05,
+      "weight_decay": 0.01,
+      "val_acc": 0.70625,
+      "val_f1": 0.6012317094168472,
+      "best_epoch": 6
+    },
+    {
+      "exp_id": "HP4",
+      "dropout": 0.3,
+      "lr_classifier": 0.0002,
+      "weight_decay": 0.01,
+      "val_acc": 0.7175,
+      "val_f1": 0.5771229395587429,
+      "best_epoch": 5
+    },
+    {
+      "exp_id": "HP5",
+      "dropout": 0.25,
+      "lr_classifier": 0.0001,
+      "weight_decay": 0.015,
+      "val_acc": 0.71625,
+      "val_f1": 0.5833005719292538,
+      "best_epoch": 5
+    }
+  ]
+}

@@ -31,7 +31,7 @@ class Config:
     MAX_GRAD_NORM = 1.0
     
     # Data
-    VAL_RATIO = 0.15
+    VAL_RATIO = 0.2  # 80/20划分，验证集800样本
     NUM_WORKERS = 0  # Windows: must be 0
     IMG_SIZE = 224  # Standard ResNet input size
     
