@@ -1,9 +1,10 @@
 {
   "completed": [
+    "HP1_LS",
+    "HP1_W3",
     "HP1_W2",
     "HP1_BEST",
-    "HP1_FOCAL_W",
-    "HP1_LS"
+    "HP1_FOCAL_W"
   ],
   "results": [
     {
@@ -18,6 +19,13 @@
       "exp_name": "\u589e\u52a0neg\u6743\u91cd(1,2,3)",
       "val_acc": 0.71625,
       "val_f1": 0.598187799710048,
+      "best_epoch": 5
+    },
+    {
+      "exp_id": "HP1_W3",
+      "exp_name": "\u589e\u52a0neg\u6743\u91cd(1,2.5,3.5)",
+      "val_acc": 0.7075,
+      "val_f1": 0.5960628097309845,
       "best_epoch": 5
     }
   ]
